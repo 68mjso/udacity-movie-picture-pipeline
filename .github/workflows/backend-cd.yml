@@ -61,8 +61,6 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v3
 
-
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -79,10 +77,11 @@ jobs:
       working-directory: starter/backend
       env:
         IMAGE_TAG: latest
-        REPO_NAME: backend
+        REPO_NAME: minhtq25-fpt-be
       run: |
         docker build --build-arg=REACT_APP_MOVIE_API_URL=http://localhost:5000 --tag 732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG .
         docker push 732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+
     - name: Update Kubeconfig
       run:
        aws eks update-kubeconfig --name cluster --region us-east-1
@@ -91,8 +90,8 @@ jobs:
       working-directory: starter/backend/k8s
       env:
         IMAGE_TAG: latest
-        REPO_NAME: backend
+        REPO_NAME: minhtq25-fpt-be
       run: |
-        aws eks update-kubeconfig --name udacity-project4 --region us-east-1
+        aws eks update-kubeconfig --name cluster --region us-east-1
         kustomize edit set image backend=732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
         kustomize build | kubectl apply -f -
