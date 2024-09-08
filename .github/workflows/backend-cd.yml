@@ -78,7 +78,7 @@ jobs:
         IMAGE_TAG: latest
         REPO_NAME: backend
       run: |
-        docker build --tag latest .
+        docker build --tag 732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG .
         docker push 732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
 
     - name: Update Kubeconfig
