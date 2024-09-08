@@ -1,3 +1,10 @@
+# Result:
+
+Frontend: http://ad40ad7a5873540cf907ef404e918f75-107826199.us-east-1.elb.amazonaws.com/
+
+Backend: http://aa51a042e66c34821b38a7af41d244e4-1559797583.us-east-1.elb.amazonaws.com/
+
+
 # Movie Picture Pipeline
 
 You've been brought on as the DevOps resource for a development team that manages a web application that is a catalog of Movie Picture movies. They're in dire need of automating their development workflows in hopes of accelerating their release cycle. They'd like to use Github Actions to automate testing, building and deploying their applications to an existing Kubernetes cluster.
