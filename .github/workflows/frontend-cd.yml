@@ -81,7 +81,7 @@ jobs:
     - name: Build Docker
       working-directory: starter/frontend
       env:
-        IMAGE_TAG: latest
+        IMAGE_TAG: latest-v2
         REPO_NAME: frontend
       run: |
         docker build --build-arg=REACT_APP_MOVIE_API_URL=http://aa51a042e66c34821b38a7af41d244e4-1559797583.us-east-1.elb.amazonaws.com/ --tag 732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG .
@@ -89,12 +89,12 @@ jobs:
     
     - name: Update Kubeconfig
       run:
-       aws eks update-kubeconfig --name cluster --region us-east-1
+        aws eks update-kubeconfig --name cluster --region us-east-1
 
     - name: Deploy Docker
       working-directory: starter/frontend/k8s
       env:
-        IMAGE_TAG: latest
+        IMAGE_TAG: latest-v2
         REPO_NAME: frontend
       run: |
           kustomize edit set image frontend=732055776162.dkr.ecr.us-east-1.amazonaws.com/$REPO_NAME:$IMAGE_TAG
